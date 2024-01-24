@@ -101,10 +101,10 @@ class _HomeState extends State<Home> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Align(
+                    const Align(
                         alignment: Alignment.bottomRight,
-                        child: Text(widget.userModel.userName)),
-                    Text(widget.userModel.password),
+                        child: Text("widget.userModel.userName")),
+                    const Text("widget.userModel.password"),
                     Align(
                       alignment: Alignment.bottomRight,
                       child: SizedBox(
@@ -131,12 +131,12 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 borderOnForeground: true,
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(widget.userModel.userName),
-                    Text(widget.userModel.password),
+                    // Text(widget.userModel.userName),
+                    // Text(widget.userModel.password),
                   ],
                 ),
               ),

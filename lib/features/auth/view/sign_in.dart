@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/config/extensions/context_extension.dart';
 import 'package:flutter_application_1/config/routes/route_names.dart';
+import 'package:flutter_application_1/features/auth/controller/auth_controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/models/user.dart';
 
@@ -12,13 +14,13 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -54,7 +56,7 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 TextFormField(
-                  controller: _usernameController,
+                  controller: _emailController,
                   validator: (value) => value!.isEmpty ? "E Harfi girme" : null,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(
@@ -112,43 +114,48 @@ class _SignInState extends State<SignIn> {
                 //   ),
                 // ), Ek bir kullanım olarak kullanılabilir
 
-                Padding(
-                  padding: context.paddingTopLow,
-                  child: MaterialButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // debugPrint("Validate edildi");
-                        final userName = _usernameController.text;
-                        final password = _passwordController.text;
-
-                        UserModel userModel =
-                            UserModel(userName: userName, password: password);
-
-                        Navigator.pushNamed(
-                          context,
-                          RouteNames.bottomNavbar,
-                          arguments: {
-                            "userModel": userModel,
-                          },
-                        );
-                      } else {
-                        debugPrint("Edilmedi");
-                      }
-                    },
-                    color: Colors.black,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: context.dynamicWidth(0.1),
-                        vertical: context.dynamicHeight(0.02),
-                      ),
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(
-                          color: Colors.white,
+                Consumer(
+                  builder: (context, ref, child) {
+                    return Padding(
+                      padding: context.paddingTopLow,
+                      child: MaterialButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // debugPrint("Validate edildi");
+                            final email = _emailController.text;
+                            final password = _passwordController.text;
+                            ref
+                                .read(authControllerProvider)
+                                .signIn(email, password)
+                                .then(
+                                  (value) => Navigator.pushNamed(
+                                    context,
+                                    RouteNames.bottomNavbar,
+                                    arguments: {
+                                      "userModel": value,
+                                    },
+                                  ),
+                                );
+                          } else {
+                            debugPrint("Edilmedi");
+                          }
+                        },
+                        color: Colors.black,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: context.dynamicWidth(0.1),
+                            vertical: context.dynamicHeight(0.02),
+                          ),
+                          child: const Text(
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 )
               ],
             ),
