@@ -4,7 +4,6 @@ import 'package:flutter_application_1/features/auth/controller/auth_controller.d
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../config/routes/route_names.dart';
-import '../../../core/models/user.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});

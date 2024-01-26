@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/config/extensions/context_extension.dart';
+import 'package:flutter_application_1/config/routes/route_names.dart';
 import 'package:flutter_application_1/config/utility/constants/drawer_menu_items.dart';
 import 'package:flutter_application_1/core/models/user.dart';
 
@@ -50,53 +51,6 @@ class _HomeState extends State<Home> {
                 decoration: BoxDecoration(
                   color: Colors.cyan,
                   borderRadius: BorderRadius.circular(15),
-                  // image: const DecorationImage(
-                  //   image: NetworkImage(
-                  //       "https://static-00.iconduck.com/assets.00/flutter-icon-1651x2048-ojswpayr.png"),
-                  // ),
-                  // gradient: const LinearGradient(
-                  //   colors: [
-                  //     Colors.black,
-                  //     Colors.red,
-                  //     Colors.amber,
-                  //   ],
-                  //   stops: [
-                  //     0.1,
-                  //     0.5,
-                  //     0.8,
-                  //   ],
-                  //   begin: Alignment.bottomLeft,
-                  //   end: Alignment.topRight,
-                  // ),
-                  // border: const Border(
-                  //   top: BorderSide(
-                  //     color: Colors.black,
-                  //     width: 2,
-                  //   ),
-                  //   left: BorderSide(
-                  //     color: Colors.black,
-                  //     width: 2,
-                  //   ),
-                  // ),
-                  // border: Border.all(
-                  //   color: Colors.black,
-                  //   width: 2.125,
-                  // ),
-                  // shape: BoxShape.rectangle,
-                  // boxShadow: const [
-                  //   BoxShadow(
-                  //     color: Colors.amber,
-                  //     offset: Offset(-10, 10),
-                  //     blurRadius: 10,
-                  //     spreadRadius: 1,
-                  //   ),
-                  //   BoxShadow(
-                  //     color: Colors.black,
-                  //     offset: Offset(-10, 10),
-                  //     blurRadius: 10,
-                  //     spreadRadius: 1,
-                  //   ),
-                  // ],
                 ),
                 child: Stack(
                   alignment: Alignment.center,
@@ -164,7 +118,10 @@ class _HomeState extends State<Home> {
               ),
               DrawerMenuItem(
                 icon: Icons.fire_truck,
-                onTap: () {},
+                onTap: () => Navigator.pushNamed(
+                  context,
+                  RouteNames.utilityPage,
+                ),
                 title: 'Taşıma',
               ),
               DrawerMenuItem(icon: Icons.abc, onTap: () {}, title: "ABC"),
